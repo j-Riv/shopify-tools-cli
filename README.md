@@ -94,6 +94,8 @@ Options:
   -h, --help     Show help                                             [boolean]
 ```
 
+### Commands
+
 #### Update Prices
 
 > Updates product variants price & compare at price.

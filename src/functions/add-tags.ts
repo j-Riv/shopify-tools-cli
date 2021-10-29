@@ -68,8 +68,6 @@ export const addTags = async (argv: any) => {
         console.log('ROW');
         console.log(row);
         const sku = row.SKU;
-        // const price = row.NewPrice;
-        // const comparePrice = row.NewCompareAtPrice;
         let tags: string[];
         if (row.tags) {
           tags = row.tags.replace(/\s/g, '').split(',');

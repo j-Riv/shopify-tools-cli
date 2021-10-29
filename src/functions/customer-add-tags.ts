@@ -71,8 +71,6 @@ export const tagCustomers = async (argv: any) => {
           firstName = row.FirstName;
           lastName = row.LastName;
         }
-        // const price = row.NewPrice;
-        // const comparePrice = row.NewCompareAtPrice;
         let tags: string;
         if (row.tags) {
           tags = row.tags;
