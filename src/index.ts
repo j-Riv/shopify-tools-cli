@@ -67,9 +67,9 @@ const argv: any = yargs
 const main = () => {
   if (argv._.includes('updatePrices')) {
     updatePrices(argv);
-  } else if (argv._.includes('addTags')) {
+  } else if (argv._.includes('addProductTags')) {
     addTags(argv);
-  } else if (argv._.includes('removeTags')) {
+  } else if (argv._.includes('removeProductTags')) {
     removeTags(argv);
   } else if (argv._.includes('tagCustomers')) {
     tagCustomers(argv);

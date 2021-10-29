@@ -16,10 +16,6 @@ let csvFileToImport: string = defaultImportName;
 let errorFileName: string = defaultErrorName;
 let store: string = defaultStore;
 
-interface Row {
-  [key: string]: string;
-}
-
 export const tagCustomers = async (argv: any) => {
   // print args
   if (argv.import) {
@@ -97,12 +93,14 @@ export const tagCustomers = async (argv: any) => {
             console.log(
               'ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.'
             );
+            row.Error = 'Product not found';
             errors.push(row);
             moveAlong();
           }
         } catch (err: any) {
           console.log('ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.');
           console.log(err.message);
+          row.Error = err.message;
           errors.push(row);
           moveAlong();
         }
@@ -289,6 +287,7 @@ const createCustomer = async (
     if (createdCustomer.data.customerCreate.customer.id === null) {
       const errors = createdCustomer.data.customerCreate.userErrors;
       console.log('ERRORS:', errors);
+      throw new Error(errors[0].message);
     }
     return createdCustomer;
   } catch (err: any) {
@@ -339,6 +338,7 @@ const customerUpdate = async (store: string, id: string, tags: string) => {
     if (updatedCustomer.data.customerUpdate.id === null) {
       const errors = updatedCustomer.data.customerUpdate.userErrors;
       console.log('ERRORS:', errors);
+      throw new Error(errors[0].message);
     }
     return updatedCustomer;
   } catch (err: any) {

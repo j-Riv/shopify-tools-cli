@@ -16,10 +16,6 @@ let csvFileToImport: string = defaultImportName;
 let errorFileName: string = defaultErrorName;
 let store: string = defaultStore;
 
-interface Row {
-  [key: string]: string;
-}
-
 export const updatePrices = async (argv: any) => {
   // print args
   if (argv.import) {
@@ -42,16 +38,6 @@ export const updatePrices = async (argv: any) => {
   console.log('============================');
 
   if (validateStore(store)) {
-    const csvWriter = createCsvWriter.createObjectCsvWriter({
-      path: path.join(__dirname, `../../errors/${errorFileName}-${date}.csv`),
-      header: [
-        { id: 'Internal ID', title: 'Internal ID' },
-        { id: 'SKU', title: 'SKU' },
-        { id: 'NewPrice', title: 'NewPrice' },
-        { id: 'NewCompareAtPrice', title: 'NewCompareAtPrice' },
-      ],
-    });
-
     const jsonArray = await csv().fromFile(
       path.join(__dirname, `../../csv/${csvFileToImport}.csv`)
     );
@@ -82,20 +68,40 @@ export const updatePrices = async (argv: any) => {
             console.log(
               'ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.'
             );
+            row.Error = 'Product / Variant not found';
             errors.push(row);
             moveAlong();
           }
         } catch (err: any) {
           console.log('ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.');
           console.log(err.message);
+          row.Error = err.message;
           errors.push(row);
           moveAlong();
         }
       } else {
-        csvWriter.writeRecords(errors).then(() => {
-          console.log('WRITING ERRORS TO CSV!');
-        });
         console.log('++++++++ DONE PROCESSING +++++++');
+        let message: string = `${errors.length} errors`;
+        if (errors.length > 0) {
+          message = `${message}, errors have been written to ${errorFileName}-${date}.csv`;
+          const csvWriter = createCsvWriter.createObjectCsvWriter({
+            path: path.join(
+              __dirname,
+              `../../errors/${errorFileName}-${date}.csv`
+            ),
+            header: [
+              { id: 'Internal ID', title: 'Internal ID' },
+              { id: 'SKU', title: 'SKU' },
+              { id: 'NewPrice', title: 'NewPrice' },
+              { id: 'NewCompareAtPrice', title: 'NewCompareAtPrice' },
+              { id: 'Error', title: 'Error' },
+            ],
+          });
+          csvWriter.writeRecords(errors).then(() => {
+            console.log('WRITING ERRORS TO CSV!');
+          });
+        }
+        console.log(message);
       }
     })();
   } else {
@@ -265,6 +271,7 @@ const updateShopifyProductVariantPrice = async (
     if (updatedProduct.data.productVariantUpdate.product === null) {
       const errors = updatedProduct.data.productVariantUpdate.userErrors;
       console.log('ERRORS:', errors);
+      throw new Error(errors[0].message);
     }
     return updatedProduct;
   } catch (err: any) {

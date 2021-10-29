@@ -16,10 +16,6 @@ let csvFileToImport: string = defaultImportName;
 let errorFileName: string = defaultErrorName;
 let store: string = defaultStore;
 
-interface Row {
-  [key: string]: string;
-}
-
 export const removeTags = async (argv: any) => {
   // print args
   if (argv.import) {
@@ -42,17 +38,6 @@ export const removeTags = async (argv: any) => {
   console.log('============================');
 
   if (validateStore(store)) {
-    const csvWriter = createCsvWriter.createObjectCsvWriter({
-      path: path.join(__dirname, `../../errors/${errorFileName}-${date}.csv`),
-      header: [
-        { id: 'Internal ID', title: 'Internal ID' },
-        { id: 'SKU', title: 'SKU' },
-        { id: 'NewPrice', title: 'NewPrice' },
-        { id: 'NewCompareAtPrice', title: 'NewCompareAtPrice' },
-        { id: 'Tags', title: 'Tags' },
-      ],
-    });
-
     const jsonArray = await csv().fromFile(
       path.join(__dirname, `../../csv/${csvFileToImport}.csv`)
     );
@@ -94,20 +79,41 @@ export const removeTags = async (argv: any) => {
             console.log(
               'ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.'
             );
+            row.Error = 'Product not found';
             errors.push(row);
             moveAlong();
           }
         } catch (err: any) {
           console.log('ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.');
           console.log(err.message);
+          row.Error = err.message;
           errors.push(row);
           moveAlong();
         }
       } else {
-        csvWriter.writeRecords(errors).then(() => {
-          console.log('WRITING ERRORS TO CSV!');
-        });
         console.log('++++++++ DONE PROCESSING +++++++');
+        let message: string = `${errors.length} errors`;
+        if (errors.length > 0) {
+          message = `${message}, errors have been written to ${errorFileName}-${date}.csv`;
+          const csvWriter = createCsvWriter.createObjectCsvWriter({
+            path: path.join(
+              __dirname,
+              `../../errors/${errorFileName}-${date}.csv`
+            ),
+            header: [
+              { id: 'Internal ID', title: 'Internal ID' },
+              { id: 'SKU', title: 'SKU' },
+              { id: 'NewPrice', title: 'NewPrice' },
+              { id: 'NewCompareAtPrice', title: 'NewCompareAtPrice' },
+              { id: 'Tags', title: 'Tags' },
+              { id: 'Error', title: 'Error' },
+            ],
+          });
+          csvWriter.writeRecords(errors).then(() => {
+            console.log('WRITING ERRORS TO CSV!');
+          });
+        }
+        console.log(message);
       }
     })();
   } else {
