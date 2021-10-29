@@ -1,0 +1,42 @@
+{
+  "name": "shopify-tools-cli",
+  "version": "0.0.1",
+  "description": "CLI to bulk edit Shopify Products / Variants, and Customers. Uses CSV to import and iterate over data.",
+  "author": "Jose A. Rivera <jose.alfredo.rivera@gmail.com>",
+  "scripts": {
+    "watch": "babel src --out-dir lib --extensions '.ts,.tsx' --watch",
+    "build-backup": "babel src --out-dir lib --extensions '.ts,.tsx'",
+    "prestart": "npm build",
+    "start": "node ./lib/server.js",
+    "lint": "eslint \"src/**\"",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch",
+    "build": "npm run build:types && npm run build:js",
+    "build:types": "tsc",
+    "build:js": "babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline"
+  },
+  "dependencies": {
+    "csv-writer": "^1.6.0",
+    "csvtojson": "^2.0.10",
+    "dotenv": "^8.2.0",
+    "node-fetch": "^2.6.1",
+    "yargs": "^17.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-transform-runtime": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^14.14.17",
+    "@types/node-fetch": "^2.5.7",
+    "@types/yargs": "^17.0.4",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "ts-loader": "^8.0.12",
+    "typescript": "^4.1.3"
+  }
+}
