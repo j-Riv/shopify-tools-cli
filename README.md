@@ -2,6 +2,23 @@
 
 > CLI to bulk edit Shopify Products / Variants, and Customers. Uses CSV to import and iterate over data.
 
+```
+index.js <command> <option> <option-value>
+
+Commands:
+  index.js updatePrices       Updates product variants price & compare at price.
+  index.js addProductTags     Adds tags to products.
+  index.js removeProductTags  Removes tags from products.
+  index.js tagCustomers       Adds tags to customer, if customer does not exists it will create them.
+
+Options:
+      --version  Show version number                                   [boolean]
+  -i, --import   The name of the csv to import ex: shopify-import       [string]
+  -e, --export   What to name the errors export ex: shopify-errors      [string]
+  -t, --tags     The tags to add to the product ex `tag1, tag2, tag3`   [string]
+  -h, --help     Show help                                             [boolean]
+```
+
 ## Setup
 
 ### CSV Imports
@@ -76,23 +93,6 @@ npm run build
 ```
 
 ## Run
-
-```
-index.js <command> <option> <option-value>
-
-Commands:
-  index.js updatePrices       Updates product variants price & compare at price.
-  index.js addProductTags     Adds tags to products.
-  index.js removeProductTags  Removes tags from products.
-  index.js tagCustomers       Adds tags to customer, if customer does not exists it will create them.
-
-Options:
-      --version  Show version number                                   [boolean]
-  -i, --import   The name of the csv to import ex: shopify-import       [string]
-  -e, --export   What to name the errors export ex: shopify-errors      [string]
-  -t, --tags     The tags to add to the product ex `tag1, tag2, tag3`   [string]
-  -h, --help     Show help                                             [boolean]
-```
 
 ### Commands
 
