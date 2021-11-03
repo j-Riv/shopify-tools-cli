@@ -54,7 +54,8 @@ export const updatePrices = async (argv: any) => {
         console.log(row);
         const sku = row.SKU;
         const price = row.NewPrice;
-        const comparePrice = row.NewCompareAtPrice;
+        const comparePrice =
+          row.NewCompareAtPrice !== '' ? row.NewCompareAtPrice : '0';
 
         try {
           const result = await search(store, sku, price, comparePrice);
