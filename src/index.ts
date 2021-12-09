@@ -72,7 +72,7 @@ const argv: any = yargs
   .option('template', {
     description:
       'The product template to search for `description-metafield-options`',
-    alias: 'te',
+    alias: 'p',
     type: 'string',
   })
   .help()
@@ -80,18 +80,22 @@ const argv: any = yargs
   .demandCommand().argv;
 
 const main = () => {
-  if (argv._.includes('updatePrices')) {
-    updatePrices(argv);
-  } else if (argv._.includes('addProductTags')) {
-    addTags(argv);
-  } else if (argv._.includes('removeProductTags')) {
-    removeTags(argv);
-  } else if (argv._.includes('tagCustomers')) {
-    tagCustomers(argv);
-  } else if (argv._.includes('getProductsByTemplate')) {
-    getProductsByTemplate(argv);
+  if (argv.store) {
+    if (argv._.includes('updatePrices') && argv.import) {
+      updatePrices(argv);
+    } else if (argv._.includes('addProductTags') && argv.import) {
+      addTags(argv);
+    } else if (argv._.includes('removeProductTags') && argv.import) {
+      removeTags(argv);
+    } else if (argv._.includes('tagCustomers') && argv.import) {
+      tagCustomers(argv);
+    } else if (argv._.includes('getProductsByTemplate') && argv.template) {
+      getProductsByTemplate(argv);
+    } else {
+      console.log('Invalid command.');
+    }
   } else {
-    console.log('Invalid command.');
+    console.log('Error! Please supply store. Ex: --store: retail');
   }
 };
 
