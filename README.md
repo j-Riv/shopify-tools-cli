@@ -16,7 +16,9 @@ Options:
   -i, --import   The name of the csv to import ex: shopify-import       [string]
   -e, --export   What to name the errors export ex: shopify-errors      [string]
   -t, --tags     The tags to add to the product ex `tag1, tag2, tag3`   [string]
-  -h, --help     Show help                                             [boolean]
+  -p, --template  The product template to search for
+                `template-suffix`                         [string]
+  -h, --help     Show help                                              [boolean]
 ```
 
 ## Setup
@@ -135,3 +137,13 @@ node lib/index.js tagCustomers --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT
 ```
 
 ex: node lib/index.js tagCustomers --store 'retail' --import 'shopify-import-test' --export 'shopify-errors' --tags 'tag1, tag2, tag3'
+
+#### Get Products By Template
+
+> Gets all products by product template.
+
+```
+node lib/index.js getProductsByTemplate --store 'STORE_NAME' --template 'TEMPLATE_SUFFIX'
+```
+
+ex: node lib/index.js getProductsByTemplate --store 'retail' --template 'template-suffix'

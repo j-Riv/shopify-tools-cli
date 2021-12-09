@@ -3,6 +3,7 @@ import { updatePrices } from './functions/update-prices';
 import { addTags } from './functions/add-tags';
 import { removeTags } from './functions/remove-tags';
 import { tagCustomers } from './functions/customer-add-tags';
+import { getProductsByTemplate } from './functions/get-products-by-template';
 
 const argv: any = yargs
   .command(
@@ -26,6 +27,14 @@ const argv: any = yargs
     },
   })
   .command('removeProductTags', 'Removes tags from products.', {
+    store: {
+      description:
+        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+      alias: 's',
+      type: 'string',
+    },
+  })
+  .command('getProductsByTemplate', 'Gets products by template.', {
     store: {
       description:
         'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
@@ -60,21 +69,32 @@ const argv: any = yargs
     alias: 't',
     type: 'string',
   })
+  .option('template', {
+    description: 'The product template to search for `template-suffix`',
+    alias: 'p',
+    type: 'string',
+  })
   .help()
   .alias('help', 'h')
   .demandCommand().argv;
 
 const main = () => {
-  if (argv._.includes('updatePrices')) {
-    updatePrices(argv);
-  } else if (argv._.includes('addProductTags')) {
-    addTags(argv);
-  } else if (argv._.includes('removeProductTags')) {
-    removeTags(argv);
-  } else if (argv._.includes('tagCustomers')) {
-    tagCustomers(argv);
+  if (argv.store) {
+    if (argv._.includes('updatePrices') && argv.import) {
+      updatePrices(argv);
+    } else if (argv._.includes('addProductTags') && argv.import) {
+      addTags(argv);
+    } else if (argv._.includes('removeProductTags') && argv.import) {
+      removeTags(argv);
+    } else if (argv._.includes('tagCustomers') && argv.import) {
+      tagCustomers(argv);
+    } else if (argv._.includes('getProductsByTemplate') && argv.template) {
+      getProductsByTemplate(argv);
+    } else {
+      console.log('Invalid command.');
+    }
   } else {
-    console.log('Invalid command.');
+    console.log('Error! Please supply store. Ex: --store: retail');
   }
 };
 
