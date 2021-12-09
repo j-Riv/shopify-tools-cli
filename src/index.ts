@@ -3,6 +3,7 @@ import { updatePrices } from './functions/update-prices';
 import { addTags } from './functions/add-tags';
 import { removeTags } from './functions/remove-tags';
 import { tagCustomers } from './functions/customer-add-tags';
+import { getProductsByTemplate } from './functions/get-products-by-template';
 
 const argv: any = yargs
   .command(
@@ -26,6 +27,14 @@ const argv: any = yargs
     },
   })
   .command('removeProductTags', 'Removes tags from products.', {
+    store: {
+      description:
+        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+      alias: 's',
+      type: 'string',
+    },
+  })
+  .command('getProductsByTemplate', 'Gets products by template.', {
     store: {
       description:
         'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
@@ -60,6 +69,12 @@ const argv: any = yargs
     alias: 't',
     type: 'string',
   })
+  .option('template', {
+    description:
+      'The product template to search for `description-metafield-options`',
+    alias: 'te',
+    type: 'string',
+  })
   .help()
   .alias('help', 'h')
   .demandCommand().argv;
@@ -73,6 +88,8 @@ const main = () => {
     removeTags(argv);
   } else if (argv._.includes('tagCustomers')) {
     tagCustomers(argv);
+  } else if (argv._.includes('getProductsByTemplate')) {
+    getProductsByTemplate(argv);
   } else {
     console.log('Invalid command.');
   }
