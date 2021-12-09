@@ -10,6 +10,7 @@ Commands:
   index.js addProductTags     Adds tags to products.
   index.js removeProductTags  Removes tags from products.
   index.js tagCustomers       Adds tags to customer, if customer does not exists it will create them.
+  index.js getProductsByTemplate  Gets products by template.
 
 Options:
       --version  Show version number                                   [boolean]
