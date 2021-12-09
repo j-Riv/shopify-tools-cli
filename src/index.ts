@@ -70,8 +70,7 @@ const argv: any = yargs
     type: 'string',
   })
   .option('template', {
-    description:
-      'The product template to search for `description-metafield-options`',
+    description: 'The product template to search for `template-suffix`',
     alias: 'p',
     type: 'string',
   })

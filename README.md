@@ -16,7 +16,9 @@ Options:
   -i, --import   The name of the csv to import ex: shopify-import       [string]
   -e, --export   What to name the errors export ex: shopify-errors      [string]
   -t, --tags     The tags to add to the product ex `tag1, tag2, tag3`   [string]
-  -h, --help     Show help                                             [boolean]
+  -p, --template  The product template to search for
+                `template-suffix`                         [string]
+  -h, --help     Show help                                              [boolean]
 ```
 
 ## Setup
