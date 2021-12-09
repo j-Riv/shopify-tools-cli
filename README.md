@@ -6,11 +6,13 @@
 index.js <command> <option> <option-value>
 
 Commands:
-  index.js updatePrices       Updates product variants price & compare at price.
-  index.js addProductTags     Adds tags to products.
-  index.js removeProductTags  Removes tags from products.
-  index.js tagCustomers       Adds tags to customer, if customer does not exists it will create them.
+  index.js updatePrices           Updates product variants price & compare at
+                                  price.
+  index.js addProductTags         Adds tags to products.
+  index.js removeProductTags      Removes tags from products.
   index.js getProductsByTemplate  Gets products by template.
+  index.js tagCustomers           Adds tags to customer, if customer does not
+                                  exists it will create them.
 
 Options:
       --version  Show version number                                   [boolean]
