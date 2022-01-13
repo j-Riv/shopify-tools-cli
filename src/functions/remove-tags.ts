@@ -54,8 +54,8 @@ export const removeTags = async (argv: any) => {
         console.log(row);
         const sku = row.SKU;
         let tags: string[];
-        if (row.tags) {
-          tags = row.tags.replace(/\s/g, '').split(',');
+        if (row.Tags) {
+          tags = row.Tags.replace(/\s/g, '').split(',');
         } else if (argv.tags) {
           tags = argv.tags.replace(/\s/g, '').split(',');
         } else {

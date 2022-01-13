@@ -105,6 +105,16 @@ npm run build
 
 > Updates product variants price & compare at price.
 
+CSV header
+
+<table>
+  <tr>
+    <th>SKU</th>
+    <th>NewPrice</th>
+    <th>NewCompareAtPrice</th>
+  </tr>
+</table>
+
 ```
 node lib/index.js updatePrices --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS'
 ```
@@ -114,6 +124,15 @@ ex: node lib/index.js updatePrices --store 'retail' --import 'shopify-import-tes
 #### Add Tags
 
 > Adds tags to products. Tags can either be passed via an argument or via the csv. Will default to csv then argument.
+
+CSV header: <em>tags are optional, if passed as argument</em>
+
+<table>
+  <tr>
+    <th>SKU</th>
+    <th>Tags</th>
+  </tr>
+</table>
 
 ```
 node lib/index.js addProductTags --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
@@ -125,6 +144,14 @@ ex: node lib/index.js addProductTags --store 'retail' --import 'shopify-import-t
 
 > Remove tags from products. Tags can either be passed via an argument or via the csv. Will default to csv then argument.
 
+CSV header: <em>tags are optional, if passed as argument</em>
+
+<table>
+  <tr>
+    <th>SKU</th>
+    <th>Tags</th>
+  </tr>
+</table>
 ```
 node lib/index.js removeProductTags --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
 ```
@@ -132,6 +159,17 @@ node lib/index.js removeProductTags --store 'STORE_NAME' --import 'CSV_FILE_TO_I
 ex: node lib/index.js removeProductTags --store 'retail' --import 'shopify-import-test' --export 'shopify-errors' --tags 'tag1, tag2, tag3'
 
 #### Customer Add Tags
+
+CSV header: <em>tags are optional, if passed as argument</em>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Tags</th>
+  </tr>
+</table>
 
 > Add tags to customer, if customer not found it creates the customer and adds the tags. Tags can either be passed via an argument or via the csv. Will default to csv then argument.
 
@@ -154,6 +192,18 @@ ex: node lib/index.js getProductsByTemplate --store 'retail' --template 'templat
 #### Update Metafields
 
 > Updates metafields
+
+CSV header
+
+<table>
+  <tr>
+    <th>SKU</th>
+    <th>MetafieldNamespace</th>
+    <th>MetafieldKey</th>
+    <th>MetafieldType</th>
+    <th>MetafieldValue</th>
+  </tr>
+</table>
 
 ```
 node lib/index.js updateMetafields --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS'
