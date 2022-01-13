@@ -3,6 +3,7 @@ import config from '../config/shopify';
 import { defaultStore } from '../config/defaults';
 
 // defaults
+const shopifyEndpoint = '.myshopify.com/admin/api/2021-10/graphql.json';
 let store: string = defaultStore;
 
 const productsWithTemplate: string[] = [];
@@ -64,9 +65,7 @@ const getAllProducts = async (store: string, cursor?: string) => {
 
   try {
     const response = await fetch(
-      'https://' +
-        config[store].name +
-        '.myshopify.com/admin/api/2021-10/graphql.json',
+      `https://${config[store].name}${shopifyEndpoint}`,
       {
         method: 'post',
         body: JSON.stringify({ query, variables }),

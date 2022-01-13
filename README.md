@@ -205,6 +205,8 @@ CSV header
   </tr>
 </table>
 
+Metafield Types can be found [here](https://shopify.dev/apps/metafields/definitions/types).
+
 ```
 node lib/index.js updateMetafields --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS'
 ```

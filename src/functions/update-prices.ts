@@ -12,6 +12,7 @@ import {
 const date = new Date();
 
 // defaults
+const shopifyEndpoint = '.myshopify.com/admin/api/2021-10/graphql.json';
 let csvFileToImport: string = defaultImportName;
 let errorFileName: string = defaultErrorName;
 let store: string = defaultStore;
@@ -176,9 +177,7 @@ const searchBySku = async (store: string, sku: string) => {
 
   try {
     const response = await fetch(
-      'https://' +
-        config[store].name +
-        '.myshopify.com/admin/api/2020-10/graphql.json',
+      `https://${config[store].name}${shopifyEndpoint}`,
       {
         method: 'post',
         body: JSON.stringify({ query, variables }),
@@ -253,9 +252,7 @@ const updateShopifyProductVariantPrice = async (
 
   try {
     const response = await fetch(
-      'https://' +
-        config[store].name +
-        '.myshopify.com/admin/api/2020-10/graphql.json',
+      `https://${config[store].name}${shopifyEndpoint}`,
       {
         method: 'post',
         body: JSON.stringify({ query, variables }),
