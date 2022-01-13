@@ -34,3 +34,5 @@ public/exports/
 csv/*
 errors/*
 *.csv
+NOTES.md
+CHANGES.md
