@@ -4,6 +4,7 @@ import { addTags } from './functions/add-tags';
 import { removeTags } from './functions/remove-tags';
 import { tagCustomers } from './functions/customer-add-tags';
 import { getProductsByTemplate } from './functions/get-products-by-template';
+import { updateMetafields } from './functions/update-metafields';
 
 const argv: any = yargs
   .command(
@@ -54,6 +55,20 @@ const argv: any = yargs
       },
     }
   )
+  .command('updateMetafields', 'Updates metafields', {
+    store: {
+      description:
+        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+      alias: 's',
+      type: 'string',
+    },
+    import: {
+      description:
+        'The name of the csv to import ex: shopify-imort, expected header values: SKU, MetafieldNamespace, MetafieldKey, MetafieldType, MetafieldValue.',
+      alias: 'i',
+      type: 'string',
+    },
+  })
   .option('import', {
     description: 'The name of the csv to import ex: shopify-import',
     alias: 'i',
@@ -90,6 +105,8 @@ const main = () => {
       tagCustomers(argv);
     } else if (argv._.includes('getProductsByTemplate') && argv.template) {
       getProductsByTemplate(argv);
+    } else if (argv._.includes('updateMetafields') && argv.import) {
+      updateMetafields(argv);
     } else {
       console.log('Invalid command.');
     }
