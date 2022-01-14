@@ -28,43 +28,7 @@ Options:
 
 ### CSV Imports
 
-Product csv imports require the following columns.
-
-<table>
-  <tr>
-    <th>Internal ID</th>
-    <th>SKU</th>
-    <th>NewPrice</th>
-    <th>NewCompareAtPrice</th>
-    <th>Tags</th>
-  </tr>
-  <tr>
-    <td>Optional</td>
-    <td>Required for product matching</td>
-    <td>Required for updating pricing</td>
-    <td>Required for updating pricing</td>
-    <td>Optional, if not used, you must pass tags via argument</td>
-  </tr>
-</table>
-
-Customer csv imports require the following columns.
-
-<table>
-  <tr>
-    <th>Internal ID</th>
-    <th>Email</th>
-    <th>FirstName</th>
-    <th>LastName</th>
-    <th>Tags</th>
-  </tr>
-  <tr>
-    <td>Optional</td>
-    <td>Required for customer matching</td>
-    <td>Optional, used during customer creation</td>
-    <td>Optional, used during customer creation</td>
-    <td>Optional, if not used, you must pass tags via argument</td>
-  </tr>
-</table>
+CSV imports are expected to be in `/csv` directory
 
 ### Config
 

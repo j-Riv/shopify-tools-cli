@@ -32,7 +32,7 @@ public/exports/
 # Specific
 .env
 csv/*
+!csv/examples
 errors/*
-*.csv
 NOTES.md
 CHANGES.md
