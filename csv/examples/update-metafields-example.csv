@@ -1,1 +1,2 @@
 SKU,MetafieldType,MetafieldNamespace,MetafieldKey,MetafieldValue
+P001NN,single_line_text_field,my_namespace,my_key,my_value
