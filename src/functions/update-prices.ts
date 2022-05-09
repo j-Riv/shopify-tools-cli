@@ -12,7 +12,7 @@ import {
 const date = new Date();
 
 // defaults
-const shopifyEndpoint = '.myshopify.com/admin/api/2021-10/graphql.json';
+const shopifyEndpoint = '.myshopify.com/admin/api/2022-04/graphql.json';
 let csvFileToImport: string = defaultImportName;
 let errorFileName: string = defaultErrorName;
 let store: string = defaultStore;

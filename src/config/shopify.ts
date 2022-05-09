@@ -20,7 +20,7 @@ const config = {
   professional: {
     key: process.env.PROFESSIONAL_API_KEY,
     pass: process.env.PROFESSIONAL_API_PASSWORD,
-    name: process.env.PROFESSONAL_STORE_NAME,
+    name: process.env.PROFESSIONAL_STORE_NAME,
   },
 };
 
