@@ -25,14 +25,14 @@ const config = {
   },
   // staging
   staging_retail: {
-    key: process.env.RETAIL_API_KEY,
-    pass: process.env.RETAIL_API_PASSWORD,
-    name: process.env.RETAIL_STORE_NAME,
+    key: process.env.STAGING_RETAIL_API_KEY,
+    pass: process.env.STAGING_RETAIL_API_PASSWORD,
+    name: process.env.STAGING_RETAIL_STORE_NAME,
   },
   staging_wholesale: {
-    key: process.env.WHOLESALE_API_KEY,
-    pass: process.env.WHOLESALE_API_PASSWORD,
-    name: process.env.WHOLESALE_STORE_NAME,
+    key: process.env.STAGING_WHOLESALE_API_KEY,
+    pass: process.env.STAGING_WHOLESALE_API_PASSWORD,
+    name: process.env.STAGING_WHOLESALE_STORE_NAME,
   },
 };
 
