@@ -119,7 +119,9 @@ export const addTags = async (argv: any) => {
     })();
   } else {
     console.log(
-      `Invalid value for store: ${store}, please use 'retail', 'wholesale', 'warehouse' or 'professional' only.`
+      `Invalid value for store: ${store}, please use ${Object.keys(config).join(
+        ', '
+      )} only.`
     );
   }
 };

@@ -26,7 +26,9 @@ export const getProductsByTemplate = async (argv: any) => {
     getAllProducts(store);
   } else {
     console.log(
-      `Invalid value for store: ${store}, please use 'retail', 'wholesale', 'warehouse' or 'professional' only.`
+      `Invalid value for store: ${store}, please use ${Object.keys(config).join(
+        ', '
+      )} only.`
     );
   }
 };
