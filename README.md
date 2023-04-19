@@ -35,6 +35,8 @@ CSV imports are expected to be in `/csv` directory
 Requires .env (config/shopify) file with the following:
 
 ```bash
+SHOPIFY_API_VERSION="2023-01"
+# PRODUCTION
 # Retail
 RETAIL_API_KEY="store api key"
 RETAIL_API_PASSWORD="store api password"
@@ -51,6 +53,15 @@ WAREHOUSE_STORE_NAME="store name"
 PROFESSIONAL_API_KEY="store api key"
 PROFESSIONAL_API_PASSWORD="store api password"
 PROFESSIONAL_STORE_NAME="store name"
+# STAGING
+# Retail
+STAGING_RETAIL_API_KEY="store api key"
+STAGING_RETAIL_API_PASSWORD="store api password"
+STAGING_RETAIL_STORE_NAME="store name"
+# Wholesale
+STAGING_WHOLESALE_API_KEY="store api key"
+STAGING_WHOLESALE_API_PASSWORD="store api password"
+STAGING_WHOLESALE_STORE_NAME="store name"
 ```
 
 If more stores get added .env file should be updated, as well as the config object.

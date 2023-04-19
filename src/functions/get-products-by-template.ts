@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 import config from '../config/shopify';
 import { defaultStore } from '../config/defaults';
+import { validateStore, shopifyEndpoint } from '../lib';
 
 // defaults
-const shopifyEndpoint = '.myshopify.com/admin/api/2021-10/graphql.json';
 let store: string = defaultStore;
 
 const productsWithTemplate: string[] = [];
@@ -29,11 +29,6 @@ export const getProductsByTemplate = async (argv: any) => {
       `Invalid value for store: ${store}, please use 'retail', 'wholesale', 'warehouse' or 'professional' only.`
     );
   }
-};
-
-const validateStore = (store: string) => {
-  const stores = ['retail', 'wholesale', 'warehouse', 'professional'];
-  return stores.includes(store);
 };
 
 const getAllProducts = async (store: string, cursor?: string) => {

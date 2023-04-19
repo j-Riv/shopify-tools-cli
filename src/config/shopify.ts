@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const config = {
+  // production
   retail: {
     key: process.env.RETAIL_API_KEY,
     pass: process.env.RETAIL_API_PASSWORD,
@@ -21,6 +22,17 @@ const config = {
     key: process.env.PROFESSIONAL_API_KEY,
     pass: process.env.PROFESSIONAL_API_PASSWORD,
     name: process.env.PROFESSIONAL_STORE_NAME,
+  },
+  // staging
+  staging_retail: {
+    key: process.env.RETAIL_API_KEY,
+    pass: process.env.RETAIL_API_PASSWORD,
+    name: process.env.RETAIL_STORE_NAME,
+  },
+  staging_wholesale: {
+    key: process.env.WHOLESALE_API_KEY,
+    pass: process.env.WHOLESALE_API_PASSWORD,
+    name: process.env.WHOLESALE_STORE_NAME,
   },
 };
 

@@ -13,7 +13,7 @@ const argv: any = yargs
     {
       store: {
         description:
-          'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+          'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional, staging_retail, staging_wholesale',
         alias: 's',
         type: 'string',
       },
@@ -22,7 +22,7 @@ const argv: any = yargs
   .command('addProductTags', 'Adds tags to products.', {
     store: {
       description:
-        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional, staging_retail, staging_wholesale',
       alias: 's',
       type: 'string',
     },
@@ -30,7 +30,7 @@ const argv: any = yargs
   .command('removeProductTags', 'Removes tags from products.', {
     store: {
       description:
-        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional, staging_retail, staging_wholesale',
       alias: 's',
       type: 'string',
     },
@@ -38,7 +38,7 @@ const argv: any = yargs
   .command('getProductsByTemplate', 'Gets products by template.', {
     store: {
       description:
-        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional, staging_retail, staging_wholesale',
       alias: 's',
       type: 'string',
     },
@@ -49,7 +49,7 @@ const argv: any = yargs
     {
       store: {
         description:
-          'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+          'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional, staging_retail, staging_wholesale',
         alias: 's',
         type: 'string',
       },
@@ -58,13 +58,13 @@ const argv: any = yargs
   .command('updateMetafields', 'Updates metafields', {
     store: {
       description:
-        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional',
+        'The Shopify config to use. Valid values: retail, wholesale, warehouse, professional, staging_retail, staging_wholesale',
       alias: 's',
       type: 'string',
     },
     import: {
       description:
-        'The name of the csv to import ex: shopify-imort, expected header values: SKU, MetafieldNamespace, MetafieldKey, MetafieldType, MetafieldValue.',
+        'The name of the csv to import ex: shopify-import, expected header values: SKU, MetafieldNamespace, MetafieldKey, MetafieldType, MetafieldValue.',
       alias: 'i',
       type: 'string',
     },

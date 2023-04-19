@@ -8,11 +8,11 @@ import {
   defaultErrorName,
   defaultStore,
 } from '../config/defaults';
+import { validateStore, shopifyEndpoint } from '../lib';
 
 const date = new Date();
 
 // defaults
-const shopifyEndpoint = '.myshopify.com/admin/api/2021-10/graphql.json';
 let csvFileToImport: string = defaultImportName;
 let errorFileName: string = defaultErrorName;
 let store: string = defaultStore;
@@ -71,14 +71,14 @@ export const updateMetafields = async (argv: any) => {
             moveAlong();
           } else {
             console.log(
-              'ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.'
+              'ERROR OCCURRED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.'
             );
             row.Error = 'Product / Variant not found';
             errors.push(row);
             moveAlong();
           }
         } catch (err: any) {
-          console.log('ERROR OCCURED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.');
+          console.log('ERROR OCCURRED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.');
           console.log(err.message);
           row.Error = err.message;
           errors.push(row);
@@ -116,11 +116,6 @@ export const updateMetafields = async (argv: any) => {
       `Invalid value for store: ${store}, please use 'retail', 'wholesale', 'warehouse' or 'professional' only.`
     );
   }
-};
-
-const validateStore = (store: string) => {
-  const stores = ['retail', 'wholesale', 'warehouse', 'professional'];
-  return stores.includes(store);
 };
 
 const search = async (

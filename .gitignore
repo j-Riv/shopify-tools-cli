@@ -36,3 +36,4 @@ csv/*
 errors/*
 NOTES.md
 CHANGES.md
+!src/lib
