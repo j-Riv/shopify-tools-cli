@@ -145,15 +145,33 @@ const search = async (
   }
 };
 
+type VariantType = {
+  node: {
+    sku: string;
+    id: string;
+    title: string;
+  };
+};
+
+type ProductType = {
+  node: {
+    id: string;
+    title: string;
+    variants: {
+      edges: VariantType[];
+    };
+  };
+};
+
 const searchBySku = async (store: string, sku: string) => {
   const query = `
     query($filter: String!) {
-      products(first:1, query: $filter) {
+      products(first:5, query: $filter) {
         edges {
           node {
             id
             title
-            variants(first:10) {
+            variants(first:60) {
               edges {
                 node {
                   sku
@@ -188,23 +206,35 @@ const searchBySku = async (store: string, sku: string) => {
     const searchResult = await response.json();
 
     if (searchResult.data.products) {
-      const product = searchResult.data.products.edges[0].node;
-      console.log('FOUND SHOPIFY PRODUCTS', product.id);
+      // loop through products
+      const products: ProductType[] = searchResult.data.products.edges;
+      let variantFound: string | null = null;
+      console.log(`FOUND ${products.length} POSSIBLE PRODUCTS`);
       console.log('MATCHING SKU TO PRODUCT VARIANT');
-      const variants = product.variants.edges;
-      const found = variants.find(function (variant) {
-        return variant.node.sku === sku;
+      products.forEach(product => {
+        if (variantFound) return;
+        const variants = product.node.variants.edges;
+        const found = variants.find(function (variant) {
+          return variant.node.sku === sku;
+        });
+        if (found) {
+          console.log('VARIANT FOUND', found.node.id);
+          variantFound = found.node.id;
+        }
       });
 
-      console.log('VARIANT FOUND', found.node.id);
+      if (variantFound) {
+        console.log('BUILDING VARIANT OBJECT', variantFound);
+        const variant = {
+          product: {
+            id: variantFound,
+          },
+        };
 
-      const variant = {
-        product: {
-          id: found.node.id,
-        },
-      };
-
-      return variant;
+        return variant;
+      } else {
+        return false;
+      }
     } else {
       console.log('PRODUCT NOT FOUND');
       return false;

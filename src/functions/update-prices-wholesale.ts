@@ -29,6 +29,9 @@ export const updatePrices = async (argv: any) => {
 
   store = argv.store;
 
+  // TODO: only handle wholesale right now
+  if (store !== 'wholesale') return;
+
   console.log('========== CONFIG ==========');
   console.log('STORE:', store);
   console.log('IMPORT FILE', csvFileToImport);
@@ -55,11 +58,11 @@ export const updatePrices = async (argv: any) => {
         console.log(row);
         const sku = row.SKU;
         const price = row.NewPrice;
-        const comparePrice =
-          row.NewCompareAtPrice !== '' ? row.NewCompareAtPrice : '0';
+        const retailPrice =
+          row.NewRetailPrice !== '' ? row.NewRetailPrice : '0';
 
         try {
-          const result = await search(store, sku, price, comparePrice);
+          const result = await search(store, sku, price, retailPrice);
           if (result) {
             console.log('RESPONSE OK, LETS MOVE ALONG!');
             console.log('+++++++++++++++++++++++++++++');
@@ -95,7 +98,7 @@ export const updatePrices = async (argv: any) => {
               { id: 'Internal ID', title: 'Internal ID' },
               { id: 'SKU', title: 'SKU' },
               { id: 'NewPrice', title: 'NewPrice' },
-              { id: 'NewCompareAtPrice', title: 'NewCompareAtPrice' },
+              { id: 'NewRetailPrice', title: 'NewRetailPrice' },
               { id: 'Error', title: 'Error' },
             ],
           });

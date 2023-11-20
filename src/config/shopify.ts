@@ -34,6 +34,22 @@ const config = {
     pass: process.env.STAGING_WHOLESALE_API_PASSWORD,
     name: process.env.STAGING_WHOLESALE_STORE_NAME,
   },
+  // Other
+  cerveza_cito: {
+    key: process.env.CERVEZACITO_API_KEY,
+    pass: process.env.CERVEZACITO_API_PASSWORD,
+    name: process.env.CERVEZACITO_STORE_NAME,
+  },
+  gunthers: {
+    key: process.env.GUNTHERS_API_KEY,
+    pass: process.env.GUNTHERS_API_PASSWORD,
+    name: process.env.GUNTHERS_STORE_NAME,
+  },
+  tres_noir: {
+    key: process.env.TN_RETAIL_API_KEY,
+    pass: process.env.TN_RETAIL_API_PASSWORD,
+    name: process.env.TN_RETAIL_STORE_NAME,
+  },
 };
 
 export default config;
