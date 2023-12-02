@@ -8,7 +8,7 @@ import {
   defaultErrorName,
   defaultStore,
 } from '../config/defaults';
-import { validateStore, shopifyEndpoint } from '../lib';
+import { validateStore, shopifyEndpoint, searchBySku } from '../lib';
 
 const date = new Date();
 
@@ -138,106 +138,6 @@ const search = async (
         price,
         comparePrice
       );
-    }
-  } catch (err: any) {
-    console.log(err.message);
-    throw new Error(err.message);
-  }
-};
-
-type VariantType = {
-  node: {
-    sku: string;
-    id: string;
-    title: string;
-  };
-};
-
-type ProductType = {
-  node: {
-    id: string;
-    title: string;
-    variants: {
-      edges: VariantType[];
-    };
-  };
-};
-
-const searchBySku = async (store: string, sku: string) => {
-  const query = `
-    query($filter: String!) {
-      products(first:5, query: $filter) {
-        edges {
-          node {
-            id
-            title
-            variants(first:60) {
-              edges {
-                node {
-                  sku
-                  id
-                  title
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const variables = {
-    filter: `sku:${sku}`,
-  };
-
-  try {
-    const response = await fetch(
-      `https://${config[store].name}${shopifyEndpoint}`,
-      {
-        method: 'post',
-        body: JSON.stringify({ query, variables }),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Access-Token': config[store].pass,
-        },
-      }
-    );
-
-    const searchResult = await response.json();
-
-    if (searchResult.data.products) {
-      // loop through products
-      const products: ProductType[] = searchResult.data.products.edges;
-      let variantFound: string | null = null;
-      console.log(`FOUND ${products.length} POSSIBLE PRODUCTS`);
-      console.log('MATCHING SKU TO PRODUCT VARIANT');
-      products.forEach(product => {
-        if (variantFound) return;
-        const variants = product.node.variants.edges;
-        const found = variants.find(function (variant) {
-          return variant.node.sku === sku;
-        });
-        if (found) {
-          console.log('VARIANT FOUND', found.node.id);
-          variantFound = found.node.id;
-        }
-      });
-
-      if (variantFound) {
-        console.log('BUILDING VARIANT OBJECT', variantFound);
-        const variant = {
-          product: {
-            id: variantFound,
-          },
-        };
-
-        return variant;
-      } else {
-        return false;
-      }
-    } else {
-      console.log('PRODUCT NOT FOUND');
-      return false;
     }
   } catch (err: any) {
     console.log(err.message);

@@ -8,7 +8,7 @@ import {
   defaultErrorName,
   defaultStore,
 } from '../config/defaults';
-import { validateStore, shopifyEndpoint } from '../lib';
+import { validateStore, shopifyEndpoint, searchBySku } from '../lib';
 
 const date = new Date();
 
@@ -56,9 +56,9 @@ export const removeTags = async (argv: any) => {
         const sku = row.SKU;
         let tags: string[];
         if (row.Tags) {
-          tags = row.Tags.replace(/\s/g, '').split(',');
+          tags = row.Tags.split(',').map(tag => tag.trim());
         } else if (argv.tags) {
-          tags = argv.tags.replace(/\s/g, '').split(',');
+          tags = (argv.tags as string).split(',').map(tag => tag.trim());
         } else {
           console.log('ERROR: no tags found.');
           return false;
@@ -129,7 +129,7 @@ export const removeTags = async (argv: any) => {
 const search = async (store: string, sku: string, tags: string[]) => {
   try {
     console.log('SEARCHING FOR SKU:' + sku);
-    const searchResult = await searchBySku(store, sku);
+    const searchResult = await searchBySku(store, sku, true);
 
     if (!searchResult) {
       // doesn't exist - create'
@@ -143,69 +143,6 @@ const search = async (store: string, sku: string, tags: string[]) => {
         searchResult.product.id,
         tags
       );
-    }
-  } catch (err: any) {
-    console.log(err.message);
-    throw new Error(err.message);
-  }
-};
-
-const searchBySku = async (store: string, sku: string) => {
-  const query = `
-    query($filter: String!) {
-      products(first:1, query: $filter) {
-        edges {
-          node {
-            id
-            title
-            variants(first:10) {
-              edges {
-                node {
-                  sku
-                  id
-                  title
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-
-  const variables = {
-    filter: `sku:${sku}`,
-  };
-
-  try {
-    const response = await fetch(
-      `https://${config[store].name}${shopifyEndpoint}`,
-      {
-        method: 'post',
-        body: JSON.stringify({ query, variables }),
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Access-Token': config[store].pass,
-        },
-      }
-    );
-
-    const searchResult = await response.json();
-
-    if (searchResult.data.products) {
-      const shopifyProduct = searchResult.data.products.edges[0].node;
-      console.log('FOUND SHOPIFY PRODUCTS', shopifyProduct.id);
-
-      const product = {
-        product: {
-          id: shopifyProduct.id,
-        },
-      };
-
-      return product;
-    } else {
-      console.log('PRODUCT NOT FOUND');
-      return false;
     }
   } catch (err: any) {
     console.log(err.message);
