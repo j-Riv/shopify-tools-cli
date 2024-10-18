@@ -160,7 +160,7 @@ const searchByEmail = async (
   lastName: string,
   tags: string
 ) => {
-  const query = `
+  const query = `#graphql
     query($filter: String!) {
       customers(first:10, query: $filter) {
         edges {
@@ -248,7 +248,7 @@ const createCustomer = async (
       tags: tags,
     },
   };
-  const query = `
+  const query = `#graphql
     mutation customerCreate($input: CustomerInput!) {
       customerCreate(input: $input) {
         userErrors {
@@ -299,7 +299,7 @@ const customerUpdate = async (store: string, id: string, tags: string) => {
       tags: tags,
     },
   };
-  const query = `
+  const query = `#graphql
     mutation customerUpdate($input: CustomerInput!) {
       customerUpdate(input: $input) {
         userErrors {

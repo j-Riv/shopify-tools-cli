@@ -14,7 +14,7 @@ export const searchBySku = async (
 ) => {
   const type = isProduct ? 'PRODUCT' : 'VARIANT';
 
-  const query = `
+  const query = `#graphql
     query($filter: String!) {
       products(first:5, query: $filter) {
         edges {

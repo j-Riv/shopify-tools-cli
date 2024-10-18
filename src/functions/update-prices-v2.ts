@@ -158,7 +158,7 @@ const updateShopifyProductVariantPrice = async (
       compareAtPrice: comparePrice === '0' ? null : comparePrice,
     },
   };
-  const query = `
+  const query = `#graphql
     mutation productVariantUpdate($input: ProductVariantInput!) {
       productVariantUpdate(input: $input) {
         product {

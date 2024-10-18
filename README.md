@@ -90,7 +90,7 @@ CSV header
   </tr>
 </table>
 
-```
+```bash
 node lib/index.js updatePrices --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS'
 ```
 
@@ -109,7 +109,7 @@ CSV header: <em>tags are optional, if passed as argument</em>
   </tr>
 </table>
 
-```
+```bash
 node lib/index.js addProductTags --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
 ```
 
@@ -127,7 +127,8 @@ CSV header: <em>tags are optional, if passed as argument</em>
     <th>Tags</th>
   </tr>
 </table>
-```
+
+```bash
 node lib/index.js removeProductTags --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
 ```
 
@@ -148,7 +149,7 @@ CSV header: <em>tags are optional, if passed as argument</em>
 
 > Add tags to customer, if customer not found it creates the customer and adds the tags. Tags can either be passed via an argument or via the csv. Will default to csv then argument.
 
-```
+```bash
 node lib/index.js tagCustomers --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
 ```
 
@@ -158,7 +159,7 @@ ex: node lib/index.js tagCustomers --store 'retail' --import 'shopify-import-tes
 
 > Gets all products by product template.
 
-```
+```bash
 node lib/index.js getProductsByTemplate --store 'STORE_NAME' --template 'TEMPLATE_SUFFIX'
 ```
 
@@ -182,7 +183,7 @@ CSV header
 
 Metafield Types can be found [here](https://shopify.dev/apps/metafields/definitions/types).
 
-```
+```bash
 node lib/index.js updateMetafields --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS'
 ```
 

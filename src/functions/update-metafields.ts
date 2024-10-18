@@ -151,7 +151,7 @@ const search = async (
 };
 
 const searchBySku = async (store: string, sku: string) => {
-  const query = `
+  const query = `#graphql
     query($filter: String!) {
       products(first:1, query: $filter) {
         edges {
@@ -245,7 +245,7 @@ const updateShopifyMetafields = async (
       value: metafield.value,
     },
   };
-  const query = `
+  const query = `#graphql
     mutation metafieldsSet($metafields: [MetafieldsSetInput!]!) {
       metafieldsSet(metafields: $metafields) {
         metafields {

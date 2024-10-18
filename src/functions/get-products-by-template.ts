@@ -37,7 +37,7 @@ const getAllProducts = async (store: string, cursor?: string) => {
   if (cursor) {
     console.log('LAST CURSOR', cursor);
   }
-  const query = `
+  const query = `#graphql
     query($cursor: String) {
       products(first:250, after: $cursor) {
         pageInfo {

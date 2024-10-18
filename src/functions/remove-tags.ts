@@ -159,7 +159,7 @@ const updateShopifyProductTags = async (
     id: id,
     tags: tags,
   };
-  const query = `
+  const query = `#graphql
     mutation tagsRemove($id: ID!, $tags: [String!]!) {
       tagsRemove(id: $id, tags: $tags) {
         node {

@@ -146,7 +146,7 @@ const search = async (
 };
 
 const searchBySku = async (store: string, sku: string) => {
-  const query = `
+  const query = `#graphql
     query($filter: String!) {
       products(first:1, query: $filter) {
         edges {
@@ -228,7 +228,7 @@ const updateShopifyProductVariantPrice = async (
       compareAtPrice: comparePrice === '0' ? null : comparePrice,
     },
   };
-  const query = `
+  const query = `#graphql
     mutation productVariantUpdate($input: ProductVariantInput!) {
       productVariantUpdate(input: $input) {
         product {
