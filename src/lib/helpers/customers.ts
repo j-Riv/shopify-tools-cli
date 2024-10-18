@@ -33,7 +33,7 @@ export const createCustomer = async (
       variables
     );
 
-    if (createdCustomer?.errors) {
+    if (createdCustomer?.errors && createdCustomer.errors.length > 0) {
       throw new Error(createdCustomer.errors[0].message);
     }
 
@@ -41,7 +41,10 @@ export const createCustomer = async (
       throw new Error('Customer not created');
     }
 
-    if (createdCustomer?.data?.customerCreate.userErrors) {
+    if (
+      createdCustomer?.data?.customerCreate.userErrors &&
+      createdCustomer.data.customerCreate.userErrors.length > 0
+    ) {
       throw new Error(
         createdCustomer.data.customerCreate.userErrors[0].message
       );
@@ -75,7 +78,7 @@ export const searchForCustomerByEmail = async (
       variables
     );
 
-    if (searchResult?.errors) {
+    if (searchResult?.errors && searchResult.errors.length > 0) {
       throw new Error(searchResult.errors[0].message);
     }
 
@@ -149,7 +152,7 @@ export const customerUpdate = async (
       variables
     );
 
-    if (updatedCustomer?.errors) {
+    if (updatedCustomer?.errors && updatedCustomer.errors.length > 0) {
       throw new Error(updatedCustomer.errors[0].message);
     }
 
@@ -157,7 +160,10 @@ export const customerUpdate = async (
       throw new Error('Customer not updated');
     }
 
-    if (updatedCustomer?.data?.customerUpdate.userErrors) {
+    if (
+      updatedCustomer?.data?.customerUpdate?.userErrors &&
+      updatedCustomer.data.customerUpdate.userErrors.length > 0
+    ) {
       throw new Error(
         updatedCustomer.data.customerUpdate.userErrors[0].message
       );

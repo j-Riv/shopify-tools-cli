@@ -1,6 +1,5 @@
 import path from 'path';
 import csv from 'csvtojson';
-import * as createCsvWriter from 'csv-writer';
 import config from '../config/shopify';
 import {
   defaultImportName,

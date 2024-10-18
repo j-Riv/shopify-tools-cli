@@ -49,7 +49,9 @@ export const fetchAdmin = async <T>(
       }
     );
 
-    return await response.json();
+    const responseJson = await response.json();
+
+    return responseJson;
   } catch (err: any) {
     console.log(err.message);
     throw new Error(err.message);

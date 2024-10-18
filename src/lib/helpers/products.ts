@@ -33,11 +33,14 @@ export const addShopifyProductTags = async (
       variables
     );
 
-    if (updatedProduct?.errors) {
+    if (updatedProduct?.errors && updatedProduct.errors.length > 0) {
       throw new Error(updatedProduct.errors[0].message);
     }
 
-    if (updatedProduct?.data?.tagsAdd?.userErrors) {
+    if (
+      updatedProduct?.data?.tagsAdd?.userErrors &&
+      updatedProduct.data.tagsAdd.userErrors.length > 0
+    ) {
       throw new Error(updatedProduct.data.tagsAdd.userErrors[0].message);
     }
 
@@ -72,11 +75,14 @@ export const removeShopifyProductTags = async (
       variables
     );
 
-    if (updatedProduct?.errors) {
+    if (updatedProduct?.errors && updatedProduct.errors.length > 0) {
       throw new Error(updatedProduct.errors[0].message);
     }
 
-    if (updatedProduct?.data?.tagsRemove?.userErrors) {
+    if (
+      updatedProduct?.data?.tagsRemove?.userErrors &&
+      updatedProduct.data.tagsRemove.userErrors.length > 0
+    ) {
       throw new Error(updatedProduct.data.tagsRemove.userErrors[0].message);
     }
 
@@ -106,15 +112,11 @@ export const searchBySku = async (store: string, sku: string) => {
       variables
     );
 
-    if (searchResult.errors) {
+    if (searchResult?.errors && searchResult.errors.length > 0) {
       throw new Error(searchResult.errors[0].message);
     }
 
-    if (!searchResult.data) {
-      throw new Error('Product not found');
-    }
-
-    if (!searchResult.data.products) {
+    if (!searchResult?.data.products) {
       throw new Error('Product not found');
     }
 
@@ -169,7 +171,7 @@ export const searchBySkuV2 = async (
       variables
     );
 
-    if (searchResult?.errors) {
+    if (searchResult?.errors && searchResult.errors.length > 0) {
       throw new Error(searchResult.errors[0].message);
     }
 
@@ -242,11 +244,14 @@ export const updateShopifyProductMetafields = async (
       variables
     );
 
-    if (updatedMetafield?.errors) {
+    if (updatedMetafield?.errors && updatedMetafield.errors.length > 0) {
       throw new Error(updatedMetafield.errors[0].message);
     }
 
-    if (updatedMetafield?.data?.metafieldsSet?.userErrors) {
+    if (
+      updatedMetafield?.data?.metafieldsSet?.userErrors &&
+      updatedMetafield.data.metafieldsSet.userErrors.length > 0
+    ) {
       throw new Error(
         updatedMetafield.data.metafieldsSet.userErrors[0].message
       );
@@ -286,11 +291,14 @@ export const updateShopifyProductVariantPrice = async (
       variables
     );
 
-    if (updatedProduct?.errors) {
+    if (updatedProduct?.errors && updatedProduct.errors.length > 0) {
       throw new Error(updatedProduct.errors[0].message);
     }
 
-    if (updatedProduct?.data?.productVariantUpdate?.userErrors) {
+    if (
+      updatedProduct?.data?.productVariantUpdate?.userErrors &&
+      updatedProduct.data.productVariantUpdate.userErrors.length > 0
+    ) {
       throw new Error(
         updatedProduct.data.productVariantUpdate.userErrors[0].message
       );
