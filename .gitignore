@@ -32,8 +32,10 @@ public/exports/
 # Specific
 .env
 csv/*
+!csv/.gitkeep
 !csv/examples
 errors/*
+!errors/.gitkeep
 NOTES.md
 CHANGES.md
 !src/lib
