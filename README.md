@@ -36,7 +36,7 @@ Copy `src/config/example.shopify.ts` to `src/config/shopify.ts` and update with 
 
 ```bash
 # Shopify Admin API
-SHOPIFY_API_VERSION="2024-01"
+SHOPIFY_API_VERSION="2024-07"
 RETAIL_API_KEY="store api key"
 RETAIL_API_PASSWORD="store api password"
 RETAIL_STORE_NAME="store name"
