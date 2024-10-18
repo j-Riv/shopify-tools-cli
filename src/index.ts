@@ -1,5 +1,5 @@
 import yargs from 'yargs';
-import { updatePrices } from './functions/update-prices';
+import { updatePrices } from './functions/update-prices-v2';
 import { addTags } from './functions/add-tags';
 import { removeTags } from './functions/remove-tags';
 import { tagCustomers } from './functions/customer-add-tags';

@@ -35,8 +35,7 @@ CSV imports are expected to be in `/csv` directory
 Requires .env (config/shopify) file with the following:
 
 ```bash
-SHOPIFY_API_VERSION="2023-01"
-# PRODUCTION
+SHOPIFY_API_VERSION="2024-01"
 # Retail
 RETAIL_API_KEY="store api key"
 RETAIL_API_PASSWORD="store api password"
@@ -45,23 +44,6 @@ RETAIL_STORE_NAME="store name"
 WHOLESALE_API_KEY="store api key"
 WHOLESALE_API_PASSWORD="store api password"
 WHOLESALE_STORE_NAME="store name"
-# Warehouse
-WAREHOUSE_API_KEY="store api key"
-WAREHOUSE_API_PASSWORD="store api password"
-WAREHOUSE_STORE_NAME="store name"
-# Professional
-PROFESSIONAL_API_KEY="store api key"
-PROFESSIONAL_API_PASSWORD="store api password"
-PROFESSIONAL_STORE_NAME="store name"
-# STAGING
-# Retail
-STAGING_RETAIL_API_KEY="store api key"
-STAGING_RETAIL_API_PASSWORD="store api password"
-STAGING_RETAIL_STORE_NAME="store name"
-# Wholesale
-STAGING_WHOLESALE_API_KEY="store api key"
-STAGING_WHOLESALE_API_PASSWORD="store api password"
-STAGING_WHOLESALE_STORE_NAME="store name"
 ```
 
 If more stores get added .env file should be updated, as well as the config object.
@@ -90,7 +72,7 @@ CSV header
   </tr>
 </table>
 
-```
+```bash
 node lib/index.js updatePrices --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS'
 ```
 
@@ -109,7 +91,7 @@ CSV header: <em>tags are optional, if passed as argument</em>
   </tr>
 </table>
 
-```
+```bash
 node lib/index.js addProductTags --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
 ```
 
@@ -127,7 +109,8 @@ CSV header: <em>tags are optional, if passed as argument</em>
     <th>Tags</th>
   </tr>
 </table>
-```
+
+```bash
 node lib/index.js removeProductTags --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
 ```
 
@@ -148,7 +131,7 @@ CSV header: <em>tags are optional, if passed as argument</em>
 
 > Add tags to customer, if customer not found it creates the customer and adds the tags. Tags can either be passed via an argument or via the csv. Will default to csv then argument.
 
-```
+```bash
 node lib/index.js tagCustomers --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS' --tags 'tag1, tag2, tag3'
 ```
 
@@ -158,7 +141,7 @@ ex: node lib/index.js tagCustomers --store 'retail' --import 'shopify-import-tes
 
 > Gets all products by product template.
 
-```
+```bash
 node lib/index.js getProductsByTemplate --store 'STORE_NAME' --template 'TEMPLATE_SUFFIX'
 ```
 
@@ -182,7 +165,7 @@ CSV header
 
 Metafield Types can be found [here](https://shopify.dev/apps/metafields/definitions/types).
 
-```
+```bash
 node lib/index.js updateMetafields --store 'STORE_NAME' --import 'CSV_FILE_TO_IMPORT' --export 'CSV_FILE_TO_EXPORT_ERRORS'
 ```
 
