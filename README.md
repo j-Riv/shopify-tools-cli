@@ -1,6 +1,15 @@
 # SHOPIFY TOOLS
 
-> CLI to bulk edit Shopify Products / Variants, and Customers. Uses CSV to import and iterate over data.
+This is a command-line tool built to simplify bulk editing of Shopify store data using the Shopify Admin API. It allows you to efficiently update products, product variants, and customer information in bulk by importing data from a CSV file. The tool automates the process of iterating through large datasets, making it easier to manage bulk price adjustments and tag updates, saving time and reducing manual work.
+
+Features:
+
+- Product:
+  - Tag updates
+- Product Variant:
+  - Price and Compare At Price updates
+- Customer:
+  - Tag Updates
 
 ```
 index.js <command> <option> <option-value>
