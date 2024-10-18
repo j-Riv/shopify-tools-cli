@@ -32,15 +32,14 @@ CSV imports are expected to be in `/csv` directory
 
 ### Config
 
-Requires .env (config/shopify) file with the following:
+Copy `src/config/example.shopify.ts` to `src/config/shopify.ts` and update with env variables for the following:
 
 ```bash
+# Shopify Admin API
 SHOPIFY_API_VERSION="2024-01"
-# Retail
 RETAIL_API_KEY="store api key"
 RETAIL_API_PASSWORD="store api password"
 RETAIL_STORE_NAME="store name"
-# Wholesale
 WHOLESALE_API_KEY="store api key"
 WHOLESALE_API_PASSWORD="store api password"
 WHOLESALE_STORE_NAME="store name"
