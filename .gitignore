@@ -38,5 +38,4 @@ NOTES.md
 CHANGES.md
 !src/lib
 
-src/config/config.ts
 src/config/shopify.ts
