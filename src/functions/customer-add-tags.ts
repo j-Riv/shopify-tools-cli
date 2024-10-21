@@ -12,9 +12,10 @@ import {
   searchForCustomerByEmail,
   customerUpdate,
   initializeCSV,
-  writeRecords,
+  writeCSVRow,
 } from '../lib';
 import type { Row } from '../lib/types';
+import { write } from 'fs';
 
 // defaults
 let csvFileToImport: string = defaultImportName;
@@ -35,6 +36,14 @@ export const tagCustomers = async (argv: any) => {
 
   printConfig(store, csvFileToImport, errorFileName);
 
+  const date = new Date();
+  const filename = `${errorFileName}-${date.toISOString()}`;
+
+  const csvWriter = initializeCSV(filename, [
+    { id: 'Email', title: 'Email' },
+    { id: 'Tags', title: 'Tags' },
+  ]);
+
   if (validateStore(store)) {
     const jsonArray = await csv().fromFile(
       path.join(__dirname, `../../csv/${csvFileToImport}.csv`)
@@ -42,7 +51,6 @@ export const tagCustomers = async (argv: any) => {
     console.log('READING CSV & CONVERTING TO JSON');
     console.log(jsonArray);
 
-    let errors: Row[] = [];
     (async function moveAlong() {
       console.log('THERE ARE (' + jsonArray.length + ') rows.');
       if (jsonArray.length > 0) {
@@ -84,34 +92,18 @@ export const tagCustomers = async (argv: any) => {
               'ERROR OCCURRED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.'
             );
             row.Error = 'Product not found';
-            errors.push(row);
+            await writeCSVRow(csvWriter, row);
             moveAlong();
           }
         } catch (err: any) {
           console.log('ERROR OCCURRED, CHECK EMAIL OR SCRIPT LOG FOR DETAILS.');
           console.log(err.message);
           row.Error = err.message;
-          errors.push(row);
+          await writeCSVRow(csvWriter, row);
           moveAlong();
         }
       } else {
         console.log('++++++++ DONE PROCESSING +++++++');
-        const date = new Date();
-        let message: string = `${errors.length} errors`;
-        if (errors.length > 0) {
-          const filename = `${errorFileName}-${date.toISOString()}`;
-          message = `${message}, errors have been written to ${filename}.csv`;
-
-          const csvWriter = initializeCSV(filename, [
-            { id: 'Email', title: 'Email' },
-            { id: 'Tags', title: 'Tags' },
-          ]);
-
-          writeRecords(csvWriter, errors).then(() => {
-            console.log('WRITING ERRORS TO CSV!');
-          });
-        }
-        console.log(message);
       }
     })();
   } else {
